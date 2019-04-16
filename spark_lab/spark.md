@@ -1,22 +1,27 @@
 ##script
 ```
+##import SparkContext
 dsrdd= sc.textFile("/loudacre/devicestatus.txt")
+
 #position 19 first delimiter
 dsarr1= dsrdd.map(lambda line: line.split(line[19]))
 
 # exactly len value 14                              
 dsarr2 = dsarr1.filter(lambda val : len(val) == 14)
 
+# len value 14 에서 1,2,3,13,14 번째 
 dsarr3 = dsarr2.map(lambda val: (val[0], val[1], val[2], val[12], val[13]))
 
+# val[1] 데이터를 ' '로 분리하여 첫번째 값 확인(manufacture와 model name으로 분리)
 dsarr4 = dsarr3.map(lambda val : val[1].split(' ')[0])
 
-##to separate the manufacturer from the model
+# 위 확인한 val[1] 데이터의 모델명만 값만 보이도록 처리
 dsarr3_1 = dsarr2.map(lambda val: (val[0], val[1].split(' ')[0], val[2], val[12], val[13]))
 
+#파일 저장
 dsarr3_1.saveAsTextFile("/loudacre/devicestatus_etl")
 ```
-##dsrdd.take(5)
+##dsrdd.take(5)-rdd 데이터 구조 확인
 ```
 u'2014-03-15:10:10:20,Sorrento F41L,8cc3b47e-bd01-4482-b500-28f2342679af,7,24,39,enabled,disabled,connected,55,67,12,33.6894754264,-117.543308253',
  u'2014-03-15:10:10:20|MeeToo 1.0|ef8c7564-0a1a-4650-a655-c8bbd5f8f943|0|31|63|70|39|27|enabled|enabled|enabled|37.4321088904|-121.485029632',
