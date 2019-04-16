@@ -16,8 +16,7 @@ dsarr3_1 = dsarr2.map(lambda val: (val[0], val[1].split(' ')[0], val[2], val[12]
 
 dsarr3_1.saveAsTextFile("/loudacre/devicestatus_etl")
 ```
-
-## dsrdd.take(5)
+##dsrdd.take(5)
 ```
 u'2014-03-15:10:10:20,Sorrento F41L,8cc3b47e-bd01-4482-b500-28f2342679af,7,24,39,enabled,disabled,connected,55,67,12,33.6894754264,-117.543308253',
  u'2014-03-15:10:10:20|MeeToo 1.0|ef8c7564-0a1a-4650-a655-c8bbd5f8f943|0|31|63|70|39|27|enabled|enabled|enabled|37.4321088904|-121.485029632',
